@@ -15,8 +15,9 @@ export default {
       this.currentTracks = tracks.tracks.items;
     },
     toMinutesAndSeconds(millis) {
-      /* TODO: implementar esta funcion */
-      return "";
+      var minutes = Math.floor(millis / 60000);
+      var seconds = ((millis % 60000) / 1000).toFixed(0);
+      return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
     },
   },
   data() {

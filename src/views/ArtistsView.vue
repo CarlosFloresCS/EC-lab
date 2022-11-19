@@ -19,17 +19,26 @@ export default {
   },
   async created() {
     //TODO: pass album id
-    const artistAlbums = await spotifyAPI.getArtistAlbums(undefined);
+    const id = this.$route.params.id;
+    const artistAlbums = await spotifyAPI.getArtistAlbums(id);
     this.albums = artistAlbums.items;
+    console.log(this.albums[1]);
   },
 };
 </script>
 
 <template>
   <div class="main">
-    <div class="albums-container">
-      {{/*TODO: Mandar los datos del album. Mira el componente para ver que se manda. Recuerda iterar porque son varios albums*/ }}
+    <div
+      class="albums-container"
+      v-for="(artistaAlbum, index) in albums"
+      :key="index"
+    >
       <ArtistAlbumComponent
+        :name="artistaAlbum.name"
+        :tracks="artistaAlbum.tracks"
+        :img="artistaAlbum.img"
+        :date="artistaAlbum.date"
       ></ArtistAlbumComponent>
     </div>
   </div>
